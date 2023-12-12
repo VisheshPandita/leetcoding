@@ -1,29 +1,22 @@
 package org.example.problems;
 
-import java.util.HashMap;
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 public class P128 {
     public int longestConsecutive(int[] nums) {
-        int res=0;
-        HashMap<Integer,Integer> map = new HashMap<>();
-        for(int n: nums){
-            if(!map.containsKey(n)){
-                int left = map.getOrDefault(n - 1, 0);
-                int right = map.getOrDefault(n + 1, 0);
-
-                int sum  = left + right + 1;
-                map.put(n, sum);
-
-                res = Math.max(res, sum);
-
-                map.put(n-left, sum);
-                map.put(n+right, sum);
-            }
+        if(nums==null || nums.length==0) return 0;
+        Set<Integer> set = new HashSet<>();
+        for(int i: nums) set.add(i);
+        int ans=0;
+        for(int num: nums){
+            int left=num-1;
+            int right=num+1;
+            while(set.remove(left)) left--;
+            while(set.remove(right)) right++;
+            ans = Math.max(ans, right-left-1);
+            if(set.isEmpty()) return ans;
         }
 
-        return res;
+        return ans;
     }
 }
