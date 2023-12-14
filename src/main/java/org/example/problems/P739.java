@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Stack;
 
 public class P739 {
+
     public int[] dailyTemperatures(int[] temperatures) {
         Stack<Integer> stack = new Stack<>();
         int[] ret = new int[temperatures.length];
